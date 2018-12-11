@@ -2,7 +2,5 @@
   os_project:
     state: present
     name: demo
-    endpoint_type: admin
     description: "Demo Project for Architects"
-    domain_id: default
     enabled: True
