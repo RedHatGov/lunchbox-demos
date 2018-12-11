@@ -24,6 +24,5 @@
     os_router:
       state: present
       name: demo_rtr
-      project: demo
       interfaces: demo-subnet
       network: public
