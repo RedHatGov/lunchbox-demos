@@ -55,5 +55,15 @@
                 EOF
                 systemctl restart skydive-agent
     with_sequence: start=1 end="{{ agent_count }}"
+    
+  - name: Wait for Skydive to come up
+    wait_for:
+      host: {{ openstack_servers.0.interface_ip }}
+      port: 8082
+      delay: 30
+      timeout: 900
 
-      
+  - name: Deploy analyzer instance
+    shell: |
+            export SKYDIVE_ANALYZERS={{ openstack_servers.0.interface_ip }}:8082
+            skydive client capture create --gremlin "G.V().Has('Name', 'eth0')"
