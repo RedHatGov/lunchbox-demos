@@ -60,7 +60,6 @@
     wait_for:
       host: {{ openstack_servers.0.interface_ip }}
       port: 8082
-      delay: 30
       timeout: 900
 
   - name: Deploy analyzer instance
