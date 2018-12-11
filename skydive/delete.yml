@@ -1,0 +1,31 @@
+---
+- name: Delete Skydive Demo
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Delete analyzer instance
+    os_server:
+      state: "{{ state }}"
+      name: "{{ item }}"
+      image: "{{ analyzer_image_name }}"
+      key_name: "{{ key_name }}"
+      wait: "{{ analyzer_wait }}"
+      flavor: "{{ analyzer_flavor_name }}"
+      auto_floating_ip: yes
+      network: "{{ network_name }}"
+    with_items:
+      - analyzer.demo.lab.local
+
+  - name: Delete an instance
+    os_server:
+      state: "{{ state }}"
+      name: "agent-{{ item }}.demo.lab.local"
+      image: "{{ agent_image_name }}"
+      key_name: "{{ key_name }}"
+      wait: "{{ agent_wait }}"
+      flavor: "{{ agent_flavor_name }}"
+      auto_floating_ip: no
+      network: "{{ network_name }}"
+    with_sequence: start=1 end="{{ agent_count }}"
+
+      

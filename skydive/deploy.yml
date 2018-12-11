@@ -21,7 +21,6 @@
   - debug:
       var: openstack_servers
       
-      
   - name: Deploy an instance
     os_server:
       state: "{{ state }}"
