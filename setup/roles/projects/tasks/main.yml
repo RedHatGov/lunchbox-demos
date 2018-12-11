@@ -3,5 +3,4 @@
     state: present
     name: demo
     description: "Demo Project for Architects"
-    domain_id: default
     enabled: True
