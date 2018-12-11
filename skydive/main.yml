@@ -5,7 +5,7 @@
   tasks:
   - name: Deploy analyzer instance
     os_server:
-      state: present
+      state: "{{ state }}"
       name: "{{ item }}"
       image: "{{ analyzer_image_name }}"
       key_name: "{{ key_name }}"
@@ -18,7 +18,7 @@
       
   - name: Deploy an instance
     os_server:
-      state: present
+      state: "{{ state }}"
       name: "agent-{{ item }}.demo.lab.local"
       image: "{{ agent_image_name }}"
       key_name: "{{ key_name }}"
