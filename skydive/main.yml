@@ -2,6 +2,7 @@
 - name: Deploy Skydive Demo
   hosts: localhost
   gather_facts: false
+  vars_files: ~/vars.yml
   tasks:
   - name: Deploy analyzer instance
     os_server:
@@ -15,6 +16,12 @@
       network: "{{ network_name }}"
     with_items:
       - analyzer.demo.lab.local
+
+  - os_server_facts:
+      server: analyzer.demo.lab.local
+  - debug:
+      var: openstack_servers
+      
       
   - name: Deploy an instance
     os_server:
@@ -30,7 +37,7 @@
                 #!/bin/bash
                 cat << EOF> /etc/skydive-agent.yml
                 analyzers:
-                - 10.0.0.53:8082
+                - {{ openstack_servers.0.interface_ip }}:8082
 
                 agent:
                   # address and port for the agent API, Format: addr:port.
@@ -49,6 +56,6 @@
                       # use all interfaces
                 EOF
                 systemctl restart skydive-agent
-    with_sequence: start=1 end=2
+    with_sequence: start=1 end="{{ agent_count }}"
 
       
