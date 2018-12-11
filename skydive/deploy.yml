@@ -58,7 +58,7 @@
     
   - name: Wait for Skydive to come up
     wait_for:
-      host: {{ openstack_servers.0.interface_ip }}
+      host: "{{ openstack_servers.0.interface_ip }}"
       port: 8082
       timeout: 900
 
