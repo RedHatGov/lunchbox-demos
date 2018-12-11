@@ -1,5 +1,5 @@
 ---
-- name: Add Floating IP's to all the servers
+- name: Setup infra for Demos
   hosts: localhost
   gather_facts: false
   tasks:

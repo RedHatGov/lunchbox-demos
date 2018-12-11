@@ -1,7 +1,0 @@
-- name: Gather facts about a previously created image named image1
-  os_image_facts:
-    image: rhel
-
-- name: Show openstack facts
-  debug:
-    var: openstack_image

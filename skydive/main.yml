@@ -1,0 +1,31 @@
+---
+- name: Deploy Skydive Demo
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Deploy analyzer instance
+    os_server:
+      state: present
+      name: "{{ item }}"
+      image: "{{ image_name }}"
+      key_name: "{{ key_name }}"
+      wait: yes
+      flavor: "{{ flavor_name }}"
+      auto_floating_ip: yes
+      network: "{{ network_name }}"
+    with_items:
+      - analyzer.demo.lab.local
+      
+  - name: Deploy an instance
+    os_server:
+      state: present
+      name: "agent-{{ item }}.demo.lab.local"
+      image: "{{ image_name }}"
+      key_name: "{{ key_name }}"
+      wait: yes
+      flavor: "{{ flavor_name }}"
+      auto_floating_ip: no
+      network: "{{ network_name }}"
+    with_sequence: start=1 end=50
+
+      
