@@ -2,8 +2,8 @@
 - hosts: all
   gather_facts: true
   roles:
-#     - projects
-#     - quotas     
-#     - networks
+     - projects
+     - quotas     
+     - networks
       - osp-check
 

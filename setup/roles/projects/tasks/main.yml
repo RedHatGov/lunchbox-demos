@@ -4,4 +4,4 @@
     name: demo
     description: "Demo Project for Architects"
     enabled: True
-    domain_id: default
+    domain_id: ''
