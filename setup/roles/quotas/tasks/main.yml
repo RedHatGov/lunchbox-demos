@@ -1,6 +1,6 @@
 - name: Update quota for operator project
   os_quota:
-    name: operator
+    name: demo
     backup_gigabytes: -1
     backups: -1
     cores: -1

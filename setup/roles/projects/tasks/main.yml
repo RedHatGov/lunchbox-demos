@@ -1,7 +1,7 @@
 - name: Create Operator Project
   os_project:
     state: present
-    name: operator
-    description: "Operator Project for Architects"
+    name: demo
+    description: "Demo Project for Architects"
     domain_id: default
     enabled: True

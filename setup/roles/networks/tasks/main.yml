@@ -1,23 +1,23 @@
 - name: Create private operator network
   os_network:
     state: present
-    name: private
+    name: demo
     external: false
-
+    
 - name: Create private facing subnet
   os_subnet:
     state: present
-    network_name: private
-    name: private-subnet
-    cidr: 172.16.123.0/24
+    network_name: demo
+    name: demo-subnet
+    cidr: 172.16.125.0/24
     enable_dhcp: true
-    dns_nameservers:
-       - "{{ ansible_dns.nameservers.0 }}"
+    dns_nameservers: 
+      - 10.0.0.1
 
 - name: Create tenant router
   os_router:
     state: present
-    name: operator_rtr
-    project: operator
-    interfaces: private-subnet
+    name: demo_rtr
+    project: demo
+    interfaces: demo-subnet
     network: public
