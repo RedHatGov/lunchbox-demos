@@ -26,6 +26,29 @@
       flavor: "{{ agent_flavor_name }}"
       auto_floating_ip: no
       network: "{{ network_name }}"
-    with_sequence: start=1 end=50
+      userdata: |
+                #!/bin/bash
+                cat << EOF> /etc/skydive-agent.yml
+                analyzers:
+                - 10.0.0.53:8082
+
+                agent:
+                  # address and port for the agent API, Format: addr:port.
+                  # Default addr is 127.0.0.1
+                  listen: 0.0.0.0:8081
+
+
+                  topology:
+                    # Probes used to capture topology information like interfaces,
+                    # bridges, namespaces, etc...
+                    # Available: ovsdb, docker, neutron, opencontrail, socketinfo, lxd, lldp
+                    probes:
+                       - lldp
+                    lldp:
+                      # Interfaces to listen for LLDP frames. If no list is specified,
+                      # use all interfaces
+                EOF
+                systemctl restart skydive-agent
+    with_sequence: start=1 end=2
 
       
