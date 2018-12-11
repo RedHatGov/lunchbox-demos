@@ -1,9 +1,13 @@
 ---
-- hosts: all
-  gather_facts: true
-  roles:
-     - projects
-     - quotas     
-     - networks
-     - osp-check
-
+- name: Add Floating IP's to all the servers
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  
+  - name: Setup Demo Project
+    os_project:
+      state: present
+      name: demo
+      description: "Demo Project for Architects"
+      enabled: True
+      domain_id: default
